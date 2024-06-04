@@ -12,11 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(
-	    origins = {"http://192.168.1.176:8080"},
-	    allowCredentials = "true",
-	    		methods = {RequestMethod.GET, RequestMethod.POST}
-	)
 @RequestMapping("public")
 public class PublicController {	
 	  @GetMapping

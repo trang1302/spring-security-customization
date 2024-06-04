@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("auth")
+@RequestMapping("api")
 public class AuthController {
     @GetMapping
     public ResponseEntity<Map<String, String>> getTest() {
