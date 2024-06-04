@@ -22,9 +22,6 @@ public class User {
   private String pw;
 
 
-
-
-
   public User() {
   }
 

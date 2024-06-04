@@ -7,8 +7,10 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.jd.basicauth.service.UserDetailsServiceImpl;
 
@@ -17,7 +19,8 @@ public class SecurityConfig {
 	
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
-
+	@Autowired
+	private RequestLoggingFilter requestLoggingFilter;
 	
 	@Bean
 	BCryptPasswordEncoder passwordEncoder() {
@@ -25,10 +28,14 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.httpBasic(Customizer.withDefaults());
-		http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
-		return http.build();
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	    http.csrf(AbstractHttpConfigurer::disable).httpBasic(Customizer.withDefaults());
+	    http.authorizeHttpRequests(auth -> 
+	        auth.requestMatchers("/public/**").permitAll()
+	            .anyRequest().authenticated()
+	    );
+	    http.addFilterBefore(requestLoggingFilter, UsernamePasswordAuthenticationFilter.class);
+	    return http.build();
 	}
 	
 	@Bean
