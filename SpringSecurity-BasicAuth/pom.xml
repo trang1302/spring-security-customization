@@ -8,11 +8,11 @@
 		<version>3.2.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.javainuse</groupId>
-	<artifactId>boot-mysql-crud</artifactId>
+	<groupId>com.jd</groupId>
+	<artifactId>BasicAuth</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>boot-mysql-crud</name>
-	<description>Demo project for Spring Boot</description>
+	<name>LaoLisV1</name>
+	<description>This is the first version </description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -29,7 +29,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
